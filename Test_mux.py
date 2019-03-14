@@ -1,5 +1,28 @@
 import RPi.GPIO as gp
-import os
+from time import sleep
+from picamera import PiCamera
+
+def switch_camera():
+ #
+ # Set the first camera 
+ #
+ gp.output(7, False)
+ gp.output(11, False)
+ gp.output(12, True)
+ #
+ # Take a photo with the first camera
+ #
+ camera.capture('image_A.jpg')
+ #
+ # Set the second camera 
+ #
+ gp.output(7, True)
+ gp.output(11, False)
+ gp.output(12, True)
+ #
+ # Take a photo with the second camera
+ # 
+ camera.capture('image_B.jpg')
 
 gp.setwarnings(False)
 gp.setmode(gp.BOARD)
@@ -13,30 +36,13 @@ gp.setup(12, gp.OUT)
 gp.output(11, True)
 gp.output(12, True)
 
-def main():
- gp.output(7, False)
- gp.output(11, False)
- gp.output(12, True)
- capture(1)
- gp.output(7, True)
- gp.output(11, False)
- gp.output(12, True)
- capture(2)
- gp.output(7, False)
- gp.output(11, True)
- gp.output(12, False)
- capture(3)
- gp.output(7, True)
- gp.output(11, True)
- gp.output(12, False)
- capture(4)
+camera  = PiCamera()
+camera.resolution = (1024, 768)
 
-def capture(cam):
- cmd = "raspistill -o capture_%d.jpg" % cam
- os.system(cmd)
+sleep(2)
 
-if __name__ == "__main__":
- main()
- gp.output(7, False)
- gp.output(11, False)
- gp.output(12, True) 
+#
+# Run function
+#
+switch_camera()
+
