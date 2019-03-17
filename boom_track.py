@@ -67,9 +67,11 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     # find contours in the thresholded image
     cnts_A = cv2.findContours(gaus_adapt_A.copy(), cv2.RETR_EXTERNAL,\
 	             cv2.CHAIN_APPROX_SIMPLE)
+    cnts_A = cnts_A[0]
     #cnts_A = imutils.grab_contours(cnts_A)
     cnts_B = cv2.findContours(gaus_adapt_B.copy(), cv2.RETR_EXTERNAL,\
 	             cv2.CHAIN_APPROX_SIMPLE)
+    cnts_B = cnts_B[0]
     #cnts_B = imutils.grab_contours(cnts_B)
     
     # Loop over the contours in image A
