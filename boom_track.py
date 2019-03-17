@@ -80,7 +80,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     
     for c in cnts_A:
         #
-        M   = cv2.moments(c)
+        M   = cv2.moments(cnts_A)
         cX_A[ii] = int(M["m10"] / M["m00"])
         cY_A[ii] = int(M["m01"] / M["m00"])
         ii = ii +1
@@ -91,9 +91,9 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     cY_B = np.zeros(size_c_B)
     ii = 0
     
-    for c in cnts_A:
+    for c in cnts_B:
         #
-        M = cv2.moments(c)
+        M = cv2.moments(cnts_B)
         cX_B[ii] = int(M["m10"] / M["m00"])
         cY_B[ii] = int(M["m01"] / M["m00"])
         ii = ii +1
