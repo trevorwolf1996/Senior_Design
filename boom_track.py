@@ -122,6 +122,8 @@ gaus_adapt_A, gaus_adapt_B = threshhold_images(image_A, image_B)
 cX_A, cY_A, cX_B, cY_B = centroid_images(gaus_adapt_A, gaus_adapt_B)
 
 print(cX_A)
+cv2.imshow("gaus_adapt_A", gaus_adapt_A)
+cv2.waitKey(0)
 
 
 
