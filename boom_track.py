@@ -65,12 +65,10 @@ def threshhold_images(image_A, image_B):
 def centroid_images(gaus_adapt_A, gaus_adapt_B):
     #
     # find contours in the thresholded image
-    cnts_A = cv2.findContours(gaus_adapt_A.copy(), cv2.RETR_EXTERNAL,\
-	             cv2.CHAIN_APPROX_SIMPLE)
+    cnts_A,_ = cv2.findContours(gaus_adapt_A, 1, 2)
     cnts_A = cnts_A[0]
     #cnts_A = imutils.grab_contours(cnts_A)
-    cnts_B = cv2.findContours(gaus_adapt_B.copy(), cv2.RETR_EXTERNAL,\
-	             cv2.CHAIN_APPROX_SIMPLE)
+    cnts_B,_ = cv2.findContours(gaus_adapt_B, 1, 2)
     cnts_B = cnts_B[0]
     #cnts_B = imutils.grab_contours(cnts_B)
     
@@ -80,9 +78,9 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     cY_A = np.zeros(size_c_A)
     ii = 0
     
-    for c in cnts_A:
+    for c_ii in cnts_A:
         #
-        M   = cv2.moments(cnts_A)
+        M   = cv2.moments(c_ii)
         cX_A[ii] = int(M["m10"] / M["m00"])
         cY_A[ii] = int(M["m01"] / M["m00"])
         ii = ii +1
@@ -93,9 +91,9 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     cY_B = np.zeros(size_c_B)
     ii = 0
     
-    for c in cnts_B:
+    for c_ii in cnts_B:
         #
-        M = cv2.moments(cnts_B)
+        M = cv2.moments(c_ii)
         cX_B[ii] = int(M["m10"] / M["m00"])
         cY_B[ii] = int(M["m01"] / M["m00"])
         ii = ii +1
