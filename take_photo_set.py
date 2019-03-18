@@ -75,17 +75,24 @@ gp.output(12, True)
 class save_data():
     pass
 
-save_data = save_data()
+save_image_A = save_data()
+save_image_B = save_data()
+save_time_A = save_data()
+save_time_B = save_data()
+
 
 for ii in range(0, 20):
     #
     image_A, image_B, t_A, t_B = take_photo_set()
-    save_data.ii = [image_A, image_B, t_A, t_B]
-    sleep(0.001)
+    save_image_A.ii = image_A
+    save_image_B.ii = image_B
+    save_time_A.ii = t_A
+    save_time_B.ii = t_B
     
-file_dump = open('image_save.obj', 'w') 
-pickle.dump(save_data, file_dump)
-    
+file_dump_A = open('image_A_save.obj', 'w') 
+file_dump_B = open('image_A_save.obj', 'w') 
+pickle.dump(save_image_A, file_dump_A)
+pickle.dump(save_image_B, file_dump_B)
     
     
 
