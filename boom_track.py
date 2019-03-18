@@ -58,8 +58,8 @@ def threshhold_images(image_A, image_B):
     #                                   cv2.THRESH_BINARY, 91, 12)
     #gaus_adapt_B = cv2.adaptiveThreshold(img_gray_B, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, \
     #                                   cv2.THRESH_BINARY, 91, 12)
-    _,gaus_adapt_A = cv2.threshold(img_gray_A,127,255,cv2.THRESH_BINARY)
-    _,gaus_adapt_B = cv2.threshold(img_gray_B,127,255,cv2.THRESH_BINARY)
+    _,gaus_adapt_A = cv2.threshold(img_gray_A,1,255,cv2.THRESH_BINARY)
+    _,gaus_adapt_B = cv2.threshold(img_gray_B,1,255,cv2.THRESH_BINARY)
     
     
     return gaus_adapt_A, gaus_adapt_B
