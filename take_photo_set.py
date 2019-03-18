@@ -90,7 +90,7 @@ for ii in range(0, 20):
     save_time_B.ii = t_B
     
 file_dump_A = open('image_A_save.obj', 'w') 
-file_dump_B = open('image_A_save.obj', 'w') 
+file_dump_B = open('image_B_save.obj', 'w') 
 pickle.dump(save_image_A, file_dump_A)
 pickle.dump(save_image_B, file_dump_B)
     
