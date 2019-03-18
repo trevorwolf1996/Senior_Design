@@ -26,7 +26,7 @@ def take_photo_set():
     #camera.capture('image_A.jpg')
     with picamera.PiCamera() as camera:
         camera.resolution = (320, 240)
-        image = np.empty((240 * 320 * 3,), dtype=np.uint8)
+        image = np.empty((240 * 320 * 3), dtype=np.uint8)
         camera.capture(image, 'bgr')
         image_B = image.reshape((240, 320, 3))
         #
