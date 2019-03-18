@@ -63,43 +63,44 @@ def threshhold_images(image_A, image_B):
 ##
     
 def centroid_images(gaus_adapt_A, gaus_adapt_B):
-    #
-    # find contours in the thresholded image
-    cnts_A = cv2.findContours(gaus_adapt_A, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #    
+    cnts_A = cv2.findContours(gaus_adapt_A, 1, 2)
     cnts_A = cnts_A[0]
-    #cnts_A = imutils.grab_contours(cnts_A)
-    cnts_B = cv2.findContours(gaus_adapt_B, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    ii = 1;
+    for c in cnts_A:
+        # compute the center of the contour
+        M = cv2.moments(c)
+        if int(M["m00"]) != 0:
+            cX = int(M["m10"] / M["m00"])
+            cY = int(M["m01"] / M["m00"])
+        #
+        if ii == 1:
+            centroids_A = np.array([cX, cY])
+            ii = 0
+        else:
+            dum = np.array([cX, cY])
+            centroids_A = np.vstack((centroids_A, dum))
+    
+    cnts_B = cv2.findContours(gaus_adapt_B, 1, 2)
     cnts_B = cnts_B[0]
-    #cnts_B = imutils.grab_contours(cnts_B)
-    
-    
-    # Loop over the contours in image A
-    size_c_A = np.size(cnts_A, 0)
-    cX_A = np.zeros(size_c_A)
-    cY_A = np.zeros(size_c_A)
-    ii = 0
-    
-    for c_ii in cnts_A:
-        #
-        M   = cv2.moments(c_ii)
-        cX_A[ii] = int(M["m10"] / M["m00"])
-        cY_A[ii] = int(M["m01"] / M["m00"])
-        ii = ii +1
-      
-    # Loop over the contours in image B
-    size_c_B = np.size(cnts_B, 0)
-    cX_B = np.zeros(size_c_B)
-    cY_B = np.zeros(size_c_B)
-    ii = 0
-    
-    for c_ii in cnts_B:
-        #
-        M = cv2.moments(c_ii)
-        cX_B[ii] = int(M["m10"] / M["m00"])
-        cY_B[ii] = int(M["m01"] / M["m00"])
-        ii = ii +1
+
+    ii = 1;
+    for c in cnts_B:
+        # compute the center of the contour
+        M = cv2.moments(c)
+        if int(M["m00"]) != 0:
+            cX = int(M["m10"] / M["m00"])
+            cY = int(M["m01"] / M["m00"])
+            #
+        if ii == 1:
+            centroids_B = np.array([cX, cY])
+            ii = 0
+        else:
+            dum = np.array([cX, cY])
+            centroids_B = np.vstack((centroids_B, dum))
         
-    return cX_A, cY_A, cX_B, cY_B
+    return centroids_A, centroids_B
 
  
 gp.setwarnings(False)
@@ -118,11 +119,11 @@ gp.output(12, True)
 
 image_A, image_B  = take_photo_set()
 gaus_adapt_A, gaus_adapt_B = threshhold_images(image_A, image_B)
-cX_A, cY_A, cX_B, cY_B = centroid_images(gaus_adapt_A, gaus_adapt_B)
+centroids_A, centroids_B = centroid_images(gaus_adapt_A, gaus_adapt_B)
 
-print(cX_A)
-cv2.imshow("gaus_adapt_A", gaus_adapt_A)
-cv2.waitKey(0)
+print(centroids_A)
+#cv2.imshow("gaus_adapt_A", gaus_adapt_A)
+#cv2.waitKey(0)
 
 
 
