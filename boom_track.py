@@ -78,7 +78,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     ii = 1;
     for c in cnts_A:
         # compute the center of the contour
-        M = cv2.moments(c)
+        M = cv2.moments(c.astype(np.float64))
         print(M)
         if int(M["m00"]) != 0:
             #print(M["m10"])
@@ -98,7 +98,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     ii = 1;
     for c in cnts_B:
         # compute the center of the contour
-        M = cv2.moments(c)
+        M = cv2.moments(c.astype(np.float64))
         print(M)
         if int(M["m00"]) != 0:
             #print(M["m10"])
