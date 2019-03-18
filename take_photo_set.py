@@ -18,6 +18,7 @@ import numpy as np
 import argparse
 import time 
 import pickle
+from tempfile import TemporaryFile
 
 def take_photo_set():
     #
@@ -31,11 +32,11 @@ def take_photo_set():
     #
     #camera.capture('image_A.jpg')
     with picamera.PiCamera() as camera:
-        camera.resolution = (1024, 768)
+        camera.resolution = (320, 240)
         camera.framerate = 24
-        image = np.empty((1024 * 768 * 3), dtype=np.uint8)
+        image = np.empty((320 * 240 * 3), dtype=np.uint8)
         camera.capture(image, 'bgr')
-        image_B = image.reshape((768, 1024, 3))
+        image_B = image.reshape((240, 320, 3))
         t_A = int(round(time.time() * 1000))
         #
         # Set the second camera 
@@ -48,11 +49,11 @@ def take_photo_set():
     # 
     # camera.capture('image_B.jpg')
     with picamera.PiCamera() as camera:
-        camera.resolution = (1024, 768)
+        camera.resolution = (320, 240)
         camera.framerate = 24
-        image = np.empty((1024 * 768 * 3), dtype=np.uint8)
+        image = np.empty((320 * 240 * 3), dtype=np.uint8)
         camera.capture(image, 'bgr')
-        image_A = image.reshape((768, 1024, 3))
+        image_A = image.reshape((240, 320, 3))
         t_B = int(round(time.time() * 1000))
 
 
@@ -71,28 +72,21 @@ gp.setup(12, gp.OUT)
 gp.output(11, True)
 gp.output(12, True)
 ##
-# call function and store images 
-class save_data():
-    pass
-
-save_image_A = save_data()
-save_image_B = save_data()
-save_time_A = save_data()
-save_time_B = save_data()
-
-
+#
+save_array_A = np.zeros((20, 3, 240, 320))
+save_array_B = np.zeros((20, 3, 240, 320))
+#
 for ii in range(0, 20):
     #
     image_A, image_B, t_A, t_B = take_photo_set()
-    save_image_A.ii = image_A
-    save_image_B.ii = image_B
-    save_time_A.ii = t_A
-    save_time_B.ii = t_B
+    save_array_A[ii, :, :, :] = image_A
+    save_array_B[ii, :, :, :] = image_B
     
-file_dump_A = open('image_A_save.obj', 'w') 
-file_dump_B = open('image_B_save.obj', 'w') 
-pickle.dump(save_image_A, file_dump_A)
-pickle.dump(save_image_B, file_dump_B)
+outfile_A = TemporaryFile()
+outfile_B = TemporaryFile()
+np.save(outfile_A, save_array_A)
+np.save(outfile_B, save_array_B)
     
+
     
 
