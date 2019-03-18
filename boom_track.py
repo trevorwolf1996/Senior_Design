@@ -27,7 +27,7 @@ def take_photo_set():
     with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)
         camera.framerate = 24
-        image = np.empty((1024 * 768 * 3), dtype=np.uint8)
+        image = np.empty((1024 * 768 * 3), dtype=np.int32)
         camera.capture(image, 'bgr')
         image_B = image.reshape((768, 1024, 3))
         #
@@ -43,7 +43,7 @@ def take_photo_set():
     with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)
         camera.framerate = 24
-        image = np.empty((1024 * 768 * 3), dtype=np.uint8)
+        image = np.empty((1024 * 768 * 3), dtype=np.int32)
         camera.capture(image, 'bgr')
         image_A = image.reshape((768, 1024, 3))
 
