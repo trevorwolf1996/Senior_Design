@@ -33,9 +33,9 @@ def take_photo_set():
     #
     # Take a photo with the first camera
     #   
-    t_A_1 = int(round(time.time() * 1000))
+    t_A_1 = int(round(time.clock() * 1000))
     camera.capture(image_A, 'bgr')
-    t_A_2 = int(round(time.time() * 1000))
+    t_A_2 = int(round(time.clock() * 1000))
     #
     # Set the second camera 
     #
@@ -45,9 +45,9 @@ def take_photo_set():
     #
     # Take a photo with the second camera
     # 
-    t_B_1 = int(round(time.time() * 1000))
+    t_B_1 = int(round(time.clock() * 1000))
     camera.capture(image_B, 'bgr')
-    t_B_2 = int(round(time.time() * 1000))   
+    t_B_2 = int(round(time.clock() * 1000))   
     #
     image_A = image_A.reshape((240, 320, 3))
     image_B = image_B.reshape((240, 320, 3))
@@ -81,6 +81,7 @@ with picamera.PiCamera() as camera:
      camera.resolution = (320, 240)
      camera.framerate = 24
      #
+     time.clock()
      for ii in range(0, 20):
          #
          image_A, image_B, t_A, t_B = take_photo_set()
