@@ -121,6 +121,7 @@ gp.output(12, True)
 ##
 
 image_A, image_B  = take_photo_set()
+print(image_A)
 gaus_adapt_A, gaus_adapt_B = threshhold_images(image_A, image_B)
 centroids_A, centroids_B = centroid_images(gaus_adapt_A, gaus_adapt_B)
 
