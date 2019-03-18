@@ -82,10 +82,8 @@ for ii in range(0, 20):
     save_array_A[ii, :, :, :] = image_A
     save_array_B[ii, :, :, :] = image_B
     
-outfile_A = TemporaryFile()
-outfile_B = TemporaryFile()
-np.save(outfile_A, save_array_A)
-np.save(outfile_B, save_array_B)
+np.save('outfile_A.npy', save_array_A)
+np.save('outfile_B.npy', save_array_B)
     
 
     
