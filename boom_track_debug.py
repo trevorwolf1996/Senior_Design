@@ -26,10 +26,11 @@ def threshhold_images(image_A, image_B):
 ##
     
 
-image_A = cv2.imread('ada_threshold.jpg', 0)
-image_B = image_A
+image_A = cv2.imread('image_A.jpg', 1)
+img_gray_A = cv2.cvtColor(image_A, cv2.COLOR_BGR2GRAY)
+img_gray_B = img_gray_A
 
-gaus_adapt_A, gaus_adapt_B = threshhold_images(image_A, image_B)
+gaus_adapt_A, gaus_adapt_B = threshhold_images(img_gray_A, img_gray_B)
 cnts_A = cv2.findContours(gaus_adapt_A, 1, 2)
 cnts = cnts_A[0]
 
