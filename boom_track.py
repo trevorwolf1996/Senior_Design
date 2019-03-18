@@ -60,8 +60,8 @@ def threshhold_images(image_A, image_B):
     #                                   cv2.THRESH_BINARY, 91, 12)
     #gaus_adapt_B = cv2.adaptiveThreshold(img_gray_B, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, \
     #                                   cv2.THRESH_BINARY, 91, 12)
-    _,gaus_adapt_A = cv2.threshold(img_gray_A,100,255,cv2.THRESH_BINARY)
-    _,gaus_adapt_B = cv2.threshold(img_gray_B,100,255,cv2.THRESH_BINARY)
+    _,gaus_adapt_A = cv2.threshold(img_gray_A,50,255,cv2.THRESH_BINARY)
+    _,gaus_adapt_B = cv2.threshold(img_gray_B,50,255,cv2.THRESH_BINARY)
     
     
     return gaus_adapt_A, gaus_adapt_B
@@ -69,6 +69,9 @@ def threshhold_images(image_A, image_B):
     
 def centroid_images(gaus_adapt_A, gaus_adapt_B):
     #    
+    centroids_A = []
+    centroids_B = []
+    #
     cnts_A = cv2.findContours(gaus_adapt_A, 1, 2)
     cnts_A = cnts_A[0]
 
