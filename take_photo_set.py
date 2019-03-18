@@ -73,8 +73,8 @@ gp.output(11, True)
 gp.output(12, True)
 ##
 #
-save_array_A = np.zeros((20, 3, 240, 320))
-save_array_B = np.zeros((20, 3, 240, 320))
+save_array_A = np.zeros((20, 240, 320, 3))
+save_array_B = np.zeros((20, 240, 320, 3))
 #
 for ii in range(0, 20):
     #
