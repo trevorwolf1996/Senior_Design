@@ -122,9 +122,9 @@ gp.output(12, True)
 
 ##
 
-image_A, image_B  = take_photo_set()
-#image_A = cv2.imread("image_A.jpg", 0)
-#image_B = cv2.imread("image_B.jpg", 0)
+#image_A, image_B  = take_photo_set()
+image_A = cv2.imread("image_A.jpg", 1)
+image_B = cv2.imread("image_B.jpg", 1)
 gaus_adapt_A, gaus_adapt_B = threshhold_images(image_A, image_B)
 centroids_A, centroids_B = centroid_images(gaus_adapt_A, gaus_adapt_B)
 
