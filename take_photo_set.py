@@ -75,15 +75,24 @@ gp.output(12, True)
 #
 save_array_A = np.zeros((20, 240, 320, 3))
 save_array_B = np.zeros((20, 240, 320, 3))
+save_time_A = np.zeros(20);
+save_time_B = np.zeros(20);
 #
 for ii in range(0, 20):
     #
     image_A, image_B, t_A, t_B = take_photo_set()
+    #
     save_array_A[ii, :, :, :] = image_A
     save_array_B[ii, :, :, :] = image_B
+    #
+    save_time_A[ii] = t_A
+    save_time_B[ii] = t_B
     
 np.save('outfile_A.npy', save_array_A)
 np.save('outfile_B.npy', save_array_B)
+np.save('outfile_time_A.npy', save_time_A)
+np.save('outfile_time_B.npy', save_time_B)
+
     
 
     
