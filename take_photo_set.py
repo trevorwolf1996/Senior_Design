@@ -91,7 +91,8 @@ with picamera.PiCamera() as camera:
          #
          save_time_A[ii] = t_A
          save_time_B[ii] = t_B
-    
+         
+print(time.clock())
 np.save('outfile_A.npy', save_array_A)
 np.save('outfile_B.npy', save_array_B)
 np.save('outfile_time_A.npy', save_time_A)
