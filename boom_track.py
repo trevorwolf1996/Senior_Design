@@ -72,7 +72,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     centroids_A = []
     centroids_B = []
     #
-    cnts_A = cv2.findContours(gaus_adapt_A, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cnts_A = cv2.findContours(gaus_adapt_A, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     cnts_A = cnts_A[0]
 
     ii = 1;
@@ -92,7 +92,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
                dum = np.array([cX, cY])
                centroids_A = np.vstack((centroids_A, dum))
     
-    cnts_B = cv2.findContours(gaus_adapt_B, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cnts_B = cv2.findContours(gaus_adapt_B, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     cnts_B = cnts_B[0]
 
     ii = 1;
