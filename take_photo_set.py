@@ -71,8 +71,8 @@ gp.output(11, True)
 gp.output(12, True)
 ##
 #
-save_array_A = np.zeros((200, 240, 320, 3))
-save_array_B = np.zeros((200, 240, 320, 3))
+save_array_A = np.zeros((50, 240, 320, 3))
+save_array_B = np.zeros((50, 240, 320, 3))
 save_time_A = np.zeros(200);
 save_time_B = np.zeros(200);
 #
@@ -82,7 +82,7 @@ with picamera.PiCamera() as camera:
      camera.framerate = 24
      #
      time.clock()
-     for ii in range(0, 200):
+     for ii in range(0, 50):
          #
          image_A, image_B, t_A, t_B = take_photo_set()
          #
