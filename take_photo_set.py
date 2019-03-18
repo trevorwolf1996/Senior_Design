@@ -77,11 +77,11 @@ class save_data():
 
 save_data = save_data()
 
-for ii in range(0, 1000):
+for ii in range(0, 20):
     #
     image_A, image_B, t_A, t_B = take_photo_set()
     save_data.ii = [image_A, image_B, t_A, t_B]
-    sleep(0.01)
+    sleep(0.001)
     
 file_dump = open('image_save.obj', 'w') 
 pickle.dump(save_data, file_dump)
