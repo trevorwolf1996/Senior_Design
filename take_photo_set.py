@@ -24,16 +24,18 @@ def take_photo_set():
     #
     # Set the first camera 
     #
+    image_A = np.empty((320 * 240 * 3), dtype=np.uint8)
+    image_B = np.empty((320 * 240 * 3), dtype=np.uint8)
+    #
     gp.output(7, False)
     gp.output(11, False)
     gp.output(12, True)
     #
     # Take a photo with the first camera
     #   
-    image = np.empty((320 * 240 * 3), dtype=np.uint8)
-    camera.capture(image, 'bgr')
-    image_B = image.reshape((240, 320, 3))
-    t_A = int(round(time.time() * 1000))
+    t_A_1 = int(round(time.time() * 1000))
+    camera.capture(image_A, 'bgr')
+    t_A_2 = int(round(time.time() * 1000))
     #
     # Set the second camera 
     #
@@ -43,11 +45,16 @@ def take_photo_set():
     #
     # Take a photo with the second camera
     # 
-    image = np.empty((320 * 240 * 3), dtype=np.uint8)
-    camera.capture(image, 'bgr')
-    image_A = image.reshape((240, 320, 3))
-    t_B = int(round(time.time() * 1000))
-    
+    t_B_1 = int(round(time.time() * 1000))
+    camera.capture(image_B, 'bgr')
+    t_B_2 = int(round(time.time() * 1000))   
+    #
+    image_A = image_A.reshape((240, 320, 3))
+    image_B = image_B.reshape((240, 320, 3))
+    #
+    t_A = (t_A_1 + t_A_2)/2
+    t_B = (t_B_1 + t_B_2)/2
+    #
     return image_A, image_B, t_A, t_B
 
 ##
