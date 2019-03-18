@@ -29,34 +29,25 @@ def take_photo_set():
     gp.output(12, True)
     #
     # Take a photo with the first camera
+    #   
+    image = np.empty((320 * 240 * 3), dtype=np.uint8)
+    camera.capture(image, 'bgr')
+    image_B = image.reshape((240, 320, 3))
+    t_A = int(round(time.time() * 1000))
     #
-    #camera.capture('image_A.jpg')
-    with picamera.PiCamera() as camera:
-        camera.resolution = (320, 240)
-        camera.framerate = 24
-        image = np.empty((320 * 240 * 3), dtype=np.uint8)
-        camera.capture(image, 'bgr')
-        image_B = image.reshape((240, 320, 3))
-        t_A = int(round(time.time() * 1000))
-        #
-        # Set the second camera 
-        #
+    # Set the second camera 
+    #
     gp.output(7, True)
     gp.output(11, False)
     gp.output(12, True)
     #
     # Take a photo with the second camera
     # 
-    # camera.capture('image_B.jpg')
-    with picamera.PiCamera() as camera:
-        camera.resolution = (320, 240)
-        camera.framerate = 24
-        image = np.empty((320 * 240 * 3), dtype=np.uint8)
-        camera.capture(image, 'bgr')
-        image_A = image.reshape((240, 320, 3))
-        t_B = int(round(time.time() * 1000))
-
-
+    image = np.empty((320 * 240 * 3), dtype=np.uint8)
+    camera.capture(image, 'bgr')
+    image_A = image.reshape((240, 320, 3))
+    t_B = int(round(time.time() * 1000))
+    
     return image_A, image_B, t_A, t_B
 
 ##
@@ -78,15 +69,20 @@ save_array_B = np.zeros((20, 240, 320, 3))
 save_time_A = np.zeros(20);
 save_time_B = np.zeros(20);
 #
-for ii in range(0, 20):
-    #
-    image_A, image_B, t_A, t_B = take_photo_set()
-    #
-    save_array_A[ii, :, :, :] = image_A
-    save_array_B[ii, :, :, :] = image_B
-    #
-    save_time_A[ii] = t_A
-    save_time_B[ii] = t_B
+with picamera.PiCamera() as camera:
+     #
+     camera.resolution = (320, 240)
+     camera.framerate = 24
+     #
+     for ii in range(0, 20):
+         #
+         image_A, image_B, t_A, t_B = take_photo_set()
+         #
+         save_array_A[ii, :, :, :] = image_A
+         save_array_B[ii, :, :, :] = image_B
+         #
+         save_time_A[ii] = t_A
+         save_time_B[ii] = t_B
     
 np.save('outfile_A.npy', save_array_A)
 np.save('outfile_B.npy', save_array_B)
