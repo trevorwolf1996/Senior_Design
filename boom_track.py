@@ -43,7 +43,7 @@ def take_photo_set():
     with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)
         camera.framerate = 24
-        image = np.empty((1024 * 768 * 3), dtype=np.int32)
+        image = np.empty((1024 * 768 * 3), dtype=np.uint32)
         camera.capture(image, 'bgr')
         image_A = image.reshape((768, 1024, 3))
 
@@ -78,7 +78,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     ii = 1;
     for c in cnts_A:
         # compute the center of the contour
-        M = cv2.moments(c.astype(np.int32))
+        M = cv2.moments(c.astype(np.uint32))
         print(M)
         if int(M["m00"]) != 0:
             #print(M["m10"])
@@ -98,7 +98,7 @@ def centroid_images(gaus_adapt_A, gaus_adapt_B):
     ii = 1;
     for c in cnts_B:
         # compute the center of the contour
-        M = cv2.moments(c.astype(np.int32))
+        M = cv2.moments(c.astype(np.uint32))
         print(M)
         if int(M["m00"]) != 0:
             #print(M["m10"])
